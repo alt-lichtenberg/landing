@@ -1,5 +1,5 @@
 ---
-
+const base = import.meta.env.BASE_URL;
 ---
 
 <section id="ueber-uns" class="py-16 md:py-24 bg-light-gray">
@@ -12,7 +12,7 @@
           Wir sind Bürger:innen aus Berlin Alt-Lichtenberg und setzen uns ehrenamtlich für einen lebenswerten Kiez mit weniger Autoverkehr und mit sicheren Straßen ein. Uns gibt es seit 2021.
         </p>
         <a
-          href="/#newsletter"
+          href={`${base}#newsletter`}
           class="inline-block bg-accent hover:bg-accent-hover text-white font-bold py-3 px-8 rounded transition-colors text-base"
         >
           Mach mit!
@@ -30,7 +30,7 @@
             <p class="mt-4">Das tun wir, um unser Ziel zu erreichen:</p>
             <ul class="list-disc list-inside space-y-2">
               <li>
-                Wir sammeln Unterschriften für unseren <a href="/files/einwohnerinnenantrag.pdf" target="_blank" rel="noopener noreferrer" class="text-primary underline hover:text-primary-dark">Einwohner:innenantrag</a>! Jetzt runterladen, unterschreiben (Vorraussetzung: Du bist in Lichtenberg gemeldet, min. 16 Jahre) und ausgefüllt an unseren Sammelstellen (aufatmen, interkosmos, Magda 19) abgeben!
+                Wir sammeln Unterschriften für unseren <a href={`${base}files/einwohnerinnenantrag.pdf`} target="_blank" rel="noopener noreferrer" class="text-primary underline hover:text-primary-dark">Einwohner:innenantrag</a>! Jetzt runterladen, unterschreiben (Vorraussetzung: Du bist in Lichtenberg gemeldet, min. 16 Jahre) und ausgefüllt an unseren Sammelstellen (aufatmen, interkosmos, Magda 19) abgeben!
               </li>
               <li>
                 Sobald wir 1.000 Unterschriften zusammen haben, können wir den Antrag für eine Entscheidung bei der Lichtenberger Bezirksverordnetenversammlung einreichen. So haben wir die Möglichkeit uns direkt an der Demokratie zu beteiligen.

@@ -1,17 +1,18 @@
 ---
+const base = import.meta.env.BASE_URL;
 const navLinks = [
-  { href: '/#ueber-uns', label: 'Über uns' },
-  { href: '/#was-wir-fordern', label: 'Was wir fordern' },
-  { href: '/files/einwohnerinnenantrag.pdf', label: 'Antrag', external: true },
-  { href: '/#newsletter', label: 'Newsletter' },
+  { href: `${base}#ueber-uns`, label: 'Über uns' },
+  { href: `${base}#was-wir-fordern`, label: 'Was wir fordern' },
+  { href: `${base}files/einwohnerinnenantrag.pdf`, label: 'Antrag', external: true },
+  { href: `${base}#newsletter`, label: 'Newsletter' },
 ];
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
   <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-    <a href="/" class="flex-shrink-0">
+    <a href={base} class="flex-shrink-0">
       <img
-        src="/images/kiezblock-alt-lichtenberg-logo.avif"
+        src={`${base}images/kiezblock-alt-lichtenberg-logo.avif`}
         alt="Kiezblock Alt-Lichtenberg Logo"
         class="h-12 w-auto"
       />

@@ -1,5 +1,5 @@
 ---
-
+const base = import.meta.env.BASE_URL;
 ---
 
 <section id="newsletter" class="py-16 md:py-24 bg-lavender">
@@ -17,7 +17,7 @@
         </div>
         <div class="mt-8">
           <img
-            src="/images/kiezblock-alt-lichtenberg-logo.avif"
+            src={`${base}images/kiezblock-alt-lichtenberg-logo.avif`}
             alt="Kiezblock Alt-Lichtenberg Logo"
             class="h-16 w-auto"
           />

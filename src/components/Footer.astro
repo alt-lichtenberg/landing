@@ -1,7 +1,8 @@
 ---
+const base = import.meta.env.BASE_URL;
 const footerLinks = [
-  { href: '/impressum', label: 'Impressum' },
-  { href: '/datenschutz', label: 'Datenschutz' },
+  { href: `${base}impressum`, label: 'Impressum' },
+  { href: `${base}datenschutz`, label: 'Datenschutz' },
   { href: 'https://www.instagram.com/altlichtenberg.beruhigdich/', label: 'Instagram' },
   { href: 'https://twitter.com/AltLbergBlock', label: 'Twitter' },
   { href: 'https://climatejustice.global/@kiezblock_alt_lichtenberg', label: 'Mastodon' },
