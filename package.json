@@ -1,0 +1,16 @@
+{
+  "name": "kiezblock-alt-lichtenberg",
+  "type": "module",
+  "version": "1.0.0",
+  "license": "AGPL-3.0-or-later",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "^5.17.1",
+    "tailwindcss": "^4.1.18"
+  }
+}

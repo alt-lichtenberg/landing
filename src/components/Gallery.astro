@@ -1,0 +1,167 @@
+---
+const images = [
+  { src: '/images/gallery/spielstrassen-1.avif', alt: 'Spielstraßen Aktion 1', caption: 'Temporäre Spielstraße in Alt-Lichtenberg' },
+  { src: '/images/gallery/spielstrassen-2.avif', alt: 'Spielstraßen Aktion 2', caption: 'Kinder spielen auf der Straße' },
+  { src: '/images/gallery/spielstrassen-3.avif', alt: 'Spielstraßen Aktion 3', caption: 'Nachbarschaft genießt die Spielstraße' },
+  { src: '/images/gallery/kinder-fahrraddemo-1.avif', alt: 'Kinder Fahrraddemo 1', caption: 'Kinder-Fahrraddemo durch den Kiez' },
+  { src: '/images/gallery/kinder-fahrraddemo-2.avif', alt: 'Kinder Fahrraddemo 2', caption: 'Gemeinsam auf dem Fahrrad unterwegs' },
+  { src: '/images/gallery/kinder-fahrraddemo-3.avif', alt: 'Kinder Fahrraddemo 3', caption: 'Sichere Straßen für alle Kinder' },
+  { src: '/images/gallery/spielstrassen-4.avif', alt: 'Spielstraßen Aktion 4', caption: 'Spielstraßen-Aktion im Sommer' },
+  { src: '/images/gallery/spielstrassen-5.avif', alt: 'Spielstraßen Aktion 5', caption: 'Lebendiger Kiez ohne Autos' },
+  { src: '/images/gallery/spielstrassen-6.avif', alt: 'Spielstraßen Aktion 6', caption: 'Straßenfest für die Nachbarschaft' },
+  { src: '/images/gallery/kinder-fahrraddemo-4.avif', alt: 'Kinder Fahrraddemo 4', caption: 'Fahrrad-Demo für sichere Schulwege' },
+  { src: '/images/gallery/spielstrassen-7.avif', alt: 'Spielstraßen Aktion 7', caption: 'Gemeinsam den Kiez gestalten' },
+];
+---
+
+<section class="py-16 md:py-24 bg-white">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row gap-8 md:gap-12">
+      <!-- Left: Title -->
+      <div class="md:w-1/4">
+        <h2 class="text-3xl font-bold leading-tight">
+          Eindrücke<br />von<br />unseren<br />Aktionen
+        </h2>
+      </div>
+
+      <!-- Right: Photo grid -->
+      <div class="md:w-3/4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+        {images.map((image, i) => (
+          <button
+            class="scroll-animate aspect-square overflow-hidden cursor-pointer border-0 p-0 bg-transparent gallery-thumb"
+            data-index={i}
+            data-src={image.src}
+            data-alt={image.alt}
+            data-caption={image.caption}
+            aria-label={`${image.alt} vergrößern`}
+          >
+            <img
+              src={image.src}
+              alt={image.alt}
+              loading="lazy"
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            />
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox Overlay -->
+<div
+  id="lightbox"
+  class="fixed inset-0 z-[100] hidden items-center justify-center"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Bildvorschau"
+>
+  <!-- Dark backdrop -->
+  <div id="lightbox-backdrop" class="absolute inset-0 bg-black/85"></div>
+
+  <!-- Close button -->
+  <button
+    id="lightbox-close"
+    class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center text-white text-3xl bg-transparent border-0 cursor-pointer hover:opacity-70 transition-opacity"
+    aria-label="Schließen"
+  >
+    &times;
+  </button>
+
+  <!-- Previous button -->
+  <button
+    id="lightbox-prev"
+    class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center text-white text-2xl bg-black/40 rounded-full border-0 cursor-pointer hover:bg-black/60 transition-colors"
+    aria-label="Vorheriges Bild"
+  >
+    &#8249;
+  </button>
+
+  <!-- Next button -->
+  <button
+    id="lightbox-next"
+    class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center text-white text-2xl bg-black/40 rounded-full border-0 cursor-pointer hover:bg-black/60 transition-colors"
+    aria-label="Nächstes Bild"
+  >
+    &#8250;
+  </button>
+
+  <!-- Image + Caption container -->
+  <div class="relative z-10 flex flex-col items-center max-w-[90vw] max-h-[90vh] px-4">
+    <img
+      id="lightbox-img"
+      src=""
+      alt=""
+      class="max-w-full max-h-[80vh] object-contain rounded"
+    />
+    <p
+      id="lightbox-caption"
+      class="mt-3 text-white text-sm sm:text-base text-center font-light"
+    ></p>
+  </div>
+</div>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+  const thumbs = document.querySelectorAll('.gallery-thumb');
+
+  let currentIndex = 0;
+  const totalImages = thumbs.length;
+
+  function openLightbox(index: number) {
+    currentIndex = index;
+    const thumb = thumbs[index] as HTMLElement;
+    const src = thumb.dataset.src || '';
+    const alt = thumb.dataset.alt || '';
+    const caption = thumb.dataset.caption || '';
+
+    lightboxImg.src = src;
+    lightboxImg.alt = alt;
+    if (lightboxCaption) lightboxCaption.textContent = caption;
+
+    lightbox?.classList.remove('hidden');
+    lightbox?.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox?.classList.add('hidden');
+    lightbox?.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+    openLightbox(currentIndex);
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % totalImages;
+    openLightbox(currentIndex);
+  }
+
+  thumbs.forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      const index = parseInt((thumb as HTMLElement).dataset.index || '0', 10);
+      openLightbox(index);
+    });
+  });
+
+  lightboxClose?.addEventListener('click', closeLightbox);
+  lightboxBackdrop?.addEventListener('click', closeLightbox);
+  lightboxPrev?.addEventListener('click', showPrev);
+  lightboxNext?.addEventListener('click', showNext);
+
+  document.addEventListener('keydown', (e) => {
+    if (lightbox?.classList.contains('hidden')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showPrev();
+    if (e.key === 'ArrowRight') showNext();
+  });
+</script>

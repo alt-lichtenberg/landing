@@ -1,0 +1,102 @@
+---
+const navLinks = [
+  { href: '/#ueber-uns', label: 'Über uns' },
+  { href: '/#was-wir-fordern', label: 'Was wir fordern' },
+  { href: '/files/einwohnerinnenantrag.pdf', label: 'Antrag', external: true },
+  { href: '/#newsletter', label: 'Newsletter' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+    <a href="/" class="flex-shrink-0">
+      <img
+        src="/images/kiezblock-alt-lichtenberg-logo.avif"
+        alt="Kiezblock Alt-Lichtenberg Logo"
+        class="h-12 w-auto"
+      />
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex items-center gap-8" aria-label="Hauptnavigation">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class="text-base font-bold text-black hover:text-primary transition-colors"
+          {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Mobile Hamburger -->
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5"
+      aria-label="Menü öffnen"
+      aria-expanded="false"
+    >
+      <span class="block w-6 h-0.5 bg-black transition-all duration-300" id="burger-top"></span>
+      <span class="block w-6 h-0.5 bg-black transition-all duration-300" id="burger-mid"></span>
+      <span class="block w-6 h-0.5 bg-black transition-all duration-300" id="burger-bot"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 bg-white z-40 hidden flex-col items-center justify-center gap-8 md:hidden"
+    role="dialog"
+    aria-label="Mobile Navigation"
+  >
+    <button
+      id="mobile-menu-close"
+      class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center text-2xl"
+      aria-label="Menü schließen"
+    >
+      &times;
+    </button>
+    {navLinks.map(link => (
+      <a
+        href={link.href}
+        class="text-xl font-light text-black hover:text-primary transition-colors mobile-nav-link"
+        {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      >
+        {link.label}
+      </a>
+    ))}
+  </div>
+</header>
+
+<!-- Spacer for fixed header -->
+<div class="h-16"></div>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const closeBtn = document.getElementById('mobile-menu-close');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+  function openMenu() {
+    menu?.classList.remove('hidden');
+    menu?.classList.add('flex');
+    btn?.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    menu?.classList.add('hidden');
+    menu?.classList.remove('flex');
+    btn?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  btn?.addEventListener('click', openMenu);
+  closeBtn?.addEventListener('click', closeMenu);
+  mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+</script>

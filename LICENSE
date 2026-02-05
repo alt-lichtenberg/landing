@@ -1,0 +1,68 @@
+# Licensing
+
+This project uses a **dual-license** model. The source code and the content
+are covered by different licenses. Please read both sections carefully.
+
+---
+
+## Code — AGPL-3.0-or-later
+
+All source code in this repository (Astro components, layouts, stylesheets,
+configuration files, build scripts, and any other code) is licensed under the
+**GNU Affero General Public License v3.0 or later (AGPL-3.0-or-later)**.
+
+See [LICENSE-AGPL-3.0](LICENSE-AGPL-3.0) for the full license text.
+
+This means you are free to use, modify, and redistribute the code — as long as
+you publish your modifications under the same license. Because this is the
+*Affero* GPL, the copyleft obligation also applies when you run a modified
+version on a server and let others interact with it over a network.
+
+### What counts as "Code"
+
+- `src/` — Astro components, layouts, page structure (`.astro`, `.ts`, `.js`)
+- `src/styles/` — CSS / Tailwind theme configuration
+- `astro.config.mjs`, `tsconfig.json`, `package.json`, `package-lock.json`
+- Any other configuration, build, or automation files
+
+---
+
+## Content — All Rights Reserved
+
+All **content, media, and brand assets** in this repository are
+**Copyright (c) Buerger:innen Initiative Kiezblock Alt-Lichtenberg**.
+All rights reserved.
+
+You may **not** use, copy, modify, or distribute this content without
+explicit written permission from the copyright holder.
+
+### What counts as "Content" (non-code)
+
+| Category            | Location / examples                                     |
+|---------------------|---------------------------------------------------------|
+| Text & copy         | All German-language text within components and pages    |
+| Photographs         | `public/images/` — hero image, gallery photos           |
+| Logo & brand marks  | `public/images/kiezblock-alt-lichtenberg-logo.avif`     |
+| Brand identity      | The name "Kiezblock Alt-Lichtenberg", color palette,    |
+|                     | and overall visual design language                      |
+| Documents           | `public/files/` — PDF forms and downloads               |
+| Favicon & OG images | Any favicon or social-media preview images              |
+
+### Fonts
+
+The Lato font files in `public/fonts/` are distributed under the
+[SIL Open Font License 1.1](https://scripts.sil.org/OFL) by their original
+author (Lukasz Dziedzic). They are **not** covered by either license above.
+
+---
+
+## Summary
+
+| Scope          | License                                  | SPDX identifier       |
+|----------------|------------------------------------------|-----------------------|
+| Source code     | GNU Affero General Public License v3.0+ | `AGPL-3.0-or-later`  |
+| Content & brand | All Rights Reserved                     | —                     |
+| Fonts (Lato)   | SIL Open Font License 1.1               | `OFL-1.1`            |
+
+If you have questions about licensing or want to request permission to use
+content, please open a GitHub issue or contact the initiative directly.

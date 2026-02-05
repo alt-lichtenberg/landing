@@ -1,0 +1,39 @@
+---
+const footerLinks = [
+  { href: '/impressum', label: 'Impressum' },
+  { href: '/datenschutz', label: 'Datenschutz' },
+  { href: 'https://www.instagram.com/altlichtenberg.beruhigdich/', label: 'Instagram' },
+  { href: 'https://twitter.com/AltLbergBlock', label: 'Twitter' },
+  { href: 'https://climatejustice.global/@kiezblock_alt_lichtenberg', label: 'Mastodon' },
+  { href: 'https://changing-cities.org/kampagnen/kiezblocks/', label: 'Changing Cities Kiezblock' },
+];
+---
+
+<footer class="bg-lavender py-12">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row justify-between gap-8">
+      <!-- Left: Name + email -->
+      <div>
+        <p class="font-bold text-sm tracking-wider uppercase mb-2">Kiezblock Alt-Lichtenberg</p>
+        <p class="text-sm font-light">kiezblock_alt_lichtenberg@disroot.org</p>
+      </div>
+
+      <!-- Right: Links -->
+      <div class="flex flex-col gap-1">
+        {footerLinks.map(link => (
+          <a
+            href={link.href}
+            class="text-sm font-light text-black underline hover:text-primary transition-colors"
+            {...(link.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-8 text-right">
+      <p class="text-sm font-light">&copy; 2026 Kiezblock Alt-Lichtenberg</p>
+    </div>
+  </div>
+</footer>

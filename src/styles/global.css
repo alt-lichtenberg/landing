@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --font-lato: 'Lato', sans-serif;
+
+  --color-primary: #3f8698;
+  --color-primary-dark: #2d6a78;
+  --color-accent: #67ac3c;
+  --color-accent-hover: #5a9a34;
+  --color-lavender: #ebedfc;
+  --color-light-gray: #f3f3f3;
+  --color-peach: #ffe0d6;
+  --color-light-blue: #dcdef7;
+  --color-light-green: #c8f0b8;
+  --color-light-pink: #f7e3d5;
+  --color-light-yellow: #fff1e0;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/fonts/lato-light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/fonts/lato-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/fonts/lato-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Lato', Arial, Helvetica, sans-serif;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: #3f8698;
+  color: white;
+}
+
+:focus-visible {
+  outline: 2px solid #3f8698;
+  outline-offset: 2px;
+}
+
+/* Scroll animation */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-animate.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-animate {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
