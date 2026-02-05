@@ -44,31 +44,32 @@ const navLinks = [
     </button>
   </div>
 
-  <!-- Mobile Menu Overlay -->
-  <div
-    id="mobile-menu"
-    class="fixed inset-0 bg-white z-40 hidden flex-col items-center justify-center gap-8 md:hidden"
-    role="dialog"
-    aria-label="Mobile Navigation"
-  >
-    <button
-      id="mobile-menu-close"
-      class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center text-2xl"
-      aria-label="Menü schließen"
-    >
-      &times;
-    </button>
-    {navLinks.map(link => (
-      <a
-        href={link.href}
-        class="text-xl font-light text-black hover:text-primary transition-colors mobile-nav-link"
-        {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-      >
-        {link.label}
-      </a>
-    ))}
-  </div>
 </header>
+
+<!-- Mobile Menu Overlay -->
+<div
+  id="mobile-menu"
+  class="fixed inset-0 bg-lavender z-[60] hidden flex-col items-center justify-center gap-10 md:hidden"
+  role="dialog"
+  aria-label="Mobile Navigation"
+>
+  <button
+    id="mobile-menu-close"
+    class="absolute top-5 right-5 w-10 h-10 flex items-center justify-center text-4xl font-light text-black"
+    aria-label="Menü schließen"
+  >
+    &times;
+  </button>
+  {[...navLinks, { href: `${base}impressum`, label: 'Impressum' }, { href: `${base}datenschutz`, label: 'Datenschutz' }].map(link => (
+    <a
+      href={link.href}
+      class="text-2xl font-bold text-black hover:text-primary transition-colors mobile-nav-link"
+      {...('external' in link && link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+    >
+      {link.label}
+    </a>
+  ))}
+</div>
 
 <!-- Spacer for fixed header -->
 <div class="h-16"></div>
