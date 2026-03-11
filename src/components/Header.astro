@@ -8,7 +8,7 @@ const navLinks = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-transform duration-300">
   <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
     <a href={base} class="flex-shrink-0">
       <img
@@ -100,5 +100,19 @@ const navLinks = [
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeMenu();
+  });
+
+  // Hide header on scroll past 100px
+  const header = document.getElementById('site-header');
+  let lastScrollY = window.scrollY;
+
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    if (currentScrollY > 100 && currentScrollY > lastScrollY) {
+      header?.classList.add('-translate-y-full');
+    } else {
+      header?.classList.remove('-translate-y-full');
+    }
+    lastScrollY = currentScrollY;
   });
 </script>
