@@ -1,0 +1,174 @@
+---
+// ============================================================
+// EVENTS — easy to edit: add/remove objects in this array
+// Required fields: title, date, time
+// Optional fields: description, link, image
+// ============================================================
+const events = [
+  {
+    title: "Kidical Mass",
+    date: "15.04.26",
+    time: "11:00 - 12:30 Uhr",
+    description: `Kidical Mass ist eine bunte Fahrraddemo für Kinder und Familien – gemeinsam zeigen wir, dass Kinder auf die Straße gehören! Mit Sicherheitsbegleitung radeln wir durch den Kiez für mehr kinderfreundliche Mobilität und sichere Radwege. Start &amp; Ziel: <a href="https://maps.app.goo.gl/Xae7bYdDQERBkwNe9" target="_blank" rel="noopener noreferrer" class="underline hover:text-primary-dark">Freiaplatz</a>.`,
+    link: "https://kinderaufsrad.org/",
+    image: "public/images/events/Screenshot 2026-04-01 at 11.24.38.png",
+  },
+];
+// ============================================================
+
+const hasEvents = events.length > 0;
+---
+
+{hasEvents && (
+  <section id="veranstaltungen" class="py-16 md:py-24 bg-light-gray">
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold mb-10 scroll-animate">Veranstaltungen</h2>
+
+      <div class="border-t border-gray-200">
+        {events.map((event) => (
+          <div class="event-item border-b border-gray-200 scroll-animate">
+            <!-- Toggle row -->
+            <button
+              class="event-toggle w-full flex items-center gap-5 py-7 text-left group cursor-pointer"
+              aria-expanded="false"
+            >
+              <span
+                class="event-arrow text-primary flex-shrink-0 transition-transform duration-300"
+                aria-hidden="true"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5l8 7-8 7z"/>
+                </svg>
+              </span>
+              <span class="flex flex-col text-sm font-light text-gray-500 w-28 flex-shrink-0 tabular-nums">
+                <span class="font-bold">{event.date}</span>
+                <span>{event.time}</span>
+              </span>
+              <span class="text-xl font-bold group-hover:text-primary transition-colors duration-200">
+                {event.title}
+              </span>
+            </button>
+
+            <!-- Expandable panel -->
+            <div
+              class="event-panel overflow-hidden"
+              style="max-height: 0; transition: max-height 0.45s ease-in-out;"
+            >
+              <div class="pb-8 flex flex-col md:flex-row gap-6 pl-9 items-start">
+                {event.image && (
+                  <button
+                    class="event-img-btn cursor-zoom-in flex-shrink-0 rounded-lg overflow-hidden w-full md:w-80 border-0 p-0 bg-transparent block"
+                    data-src={event.image}
+                    data-alt={event.title}
+                    aria-label={`${event.title} vergrößern`}
+                  >
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      class="w-full h-auto md:h-64 md:object-cover block"
+                      loading="lazy"
+                    />
+                  </button>
+                )}
+                <div class="flex flex-col gap-4 justify-start">
+                  {event.description && (
+                    <p class="text-base font-light leading-[1.8] [&_a]:underline [&_a]:text-primary [&_a:hover]:text-primary-dark [&_a]:transition-colors" set:html={event.description} />
+                  )}
+                  {event.link && (
+                    <a
+                      href={event.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1 text-primary font-bold underline hover:text-primary-dark transition-colors self-end ml-auto"
+                    >
+                      → Mehr Info
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<!-- Lightbox overlay -->
+<div
+  id="event-lightbox"
+  class="fixed inset-0 z-[100] hidden items-center justify-center"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Bildvorschau"
+>
+  <div id="event-lightbox-backdrop" class="absolute inset-0 bg-black/85"></div>
+
+  <button
+    id="event-lightbox-close"
+    class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center text-white text-3xl bg-transparent border-0 cursor-pointer hover:opacity-70 transition-opacity"
+    aria-label="Schließen"
+  >
+    &times;
+  </button>
+
+  <div class="relative z-10 flex items-center justify-center max-w-[90vw] max-h-[90vh] px-4">
+    <img
+      id="event-lightbox-img"
+      src=""
+      alt=""
+      class="max-w-full max-h-[90vh] object-contain rounded"
+    />
+  </div>
+</div>
+
+<script>
+  // Accordion
+  document.querySelectorAll('.event-toggle').forEach((toggle) => {
+    toggle.addEventListener('click', () => {
+      const panel = toggle.nextElementSibling as HTMLElement;
+      const arrow = toggle.querySelector('.event-arrow') as HTMLElement;
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+
+      toggle.setAttribute('aria-expanded', String(!open));
+      panel.style.maxHeight = open ? '0' : panel.scrollHeight + 'px';
+      arrow.style.transform = open ? '' : 'rotate(90deg)';
+    });
+  });
+
+  // Lightbox
+  const eventLightbox = document.getElementById('event-lightbox');
+  const eventLightboxImg = document.getElementById('event-lightbox-img') as HTMLImageElement;
+  const eventLightboxClose = document.getElementById('event-lightbox-close');
+  const eventLightboxBackdrop = document.getElementById('event-lightbox-backdrop');
+
+  function openEventLightbox(src: string, alt: string) {
+    eventLightboxImg.src = src;
+    eventLightboxImg.alt = alt;
+    eventLightbox?.classList.remove('hidden');
+    eventLightbox?.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeEventLightbox() {
+    eventLightbox?.classList.add('hidden');
+    eventLightbox?.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.event-img-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const src = (btn as HTMLElement).dataset.src || '';
+      const alt = (btn as HTMLElement).dataset.alt || '';
+      openEventLightbox(src, alt);
+    });
+  });
+
+  eventLightboxClose?.addEventListener('click', closeEventLightbox);
+  eventLightboxBackdrop?.addEventListener('click', closeEventLightbox);
+
+  document.addEventListener('keydown', (e) => {
+    if (eventLightbox?.classList.contains('hidden')) return;
+    if (e.key === 'Escape') closeEventLightbox();
+  });
+</script>
