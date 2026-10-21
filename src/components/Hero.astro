@@ -17,15 +17,20 @@ const base = import.meta.env.BASE_URL;
           <p>
             🗺️ <strong class="font-bold">Nur bis 31.10.:</strong> Das Bezirksamt sammelt Ideen für Alt-Lichtenberg Ost. Markiere auf der <a href="https://mein.berlin.de/projekte/module/ideensammlung-mit-karte-133/" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent font-bold">Kiezkarte bei mein.berlin</a>, wo es beim Fuß-, Rad- und Autoverkehr Handlungsbedarf gibt.
           </p>
-          <p>
-            📋 Unser <a href={`${base}konzept`} class="underline hover:text-accent font-bold">Konzept zur Verkehrsberuhigung</a> ist fertig: 16 Einbahn-Segmente, 4 Fahrradstraßen und 24 dokumentierte Gefahrenstellen — stufig, reversibel und sofort umsetzbar.
-          </p>
-          <p>
-            👉 Mach mit! Wohnst Du in Lichtenberg, unterschreibe unseren <a href={`${base}files/einwohnerinnenantrag.pdf`} target="_blank" rel="noopener noreferrer" class="underline hover:text-accent">Einwohner:innen-Antrag</a> — Listen liegen bei Interkosmos, Magda19 und Aufatmen aus.
-          </p>
-          <p>
-            Oder beteilige Dich online auf der Karten-Plattform <a href="https://parry.vote/project/kbal" class="underline hover:text-accent">Parry</a>.
-          </p>
+          <details>
+            <summary class="cursor-pointer font-bold hover:text-accent">Mehr</summary>
+            <div class="mt-4 space-y-4">
+              <p>
+                📋 Unser <a href={`${base}konzept`} class="underline hover:text-accent font-bold">Konzept zur Verkehrsberuhigung</a> ist fertig: 16 Einbahn-Segmente, 4 Fahrradstraßen und 24 dokumentierte Gefahrenstellen — stufig, reversibel und sofort umsetzbar.
+              </p>
+              <p>
+                👉 Mach mit! Wohnst Du in Lichtenberg, unterschreibe unseren <a href={`${base}files/einwohnerinnenantrag.pdf`} target="_blank" rel="noopener noreferrer" class="underline hover:text-accent">Einwohner:innen-Antrag</a> — Listen liegen bei Interkosmos, Magda19 und Aufatmen aus.
+              </p>
+              <p>
+                Oder beteilige Dich online auf der Karten-Plattform <a href="https://parry.vote/project/kbal" class="underline hover:text-accent">Parry</a>.
+              </p>
+            </div>
+          </details>
         </div>
         <div class="mt-8">
           <a
